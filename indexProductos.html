@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>High Sierra Boutique</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+body { font-family: 'Montserrat', sans-serif; }
+.section-padding { padding: 100px 0; }
+.bg-hs-off-white { background-color: #EEF0F2; }
+
+.serif { font-family: 'Playfair Display', serif; }
+.serif-italic { font-family: 'Playfair Display', serif; font-style: italic; }
+
+.glow-text {
+    position: relative;
+}
+.glow-text::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120%; height: 150%;
+    background: radial-gradient(ellipse, rgba(194,155,111,0.15), transparent);
+    z-index: -1;
+}
+
+.card-boutique {
+    border: none;
+    background-color: transparent;
+    transition: transform 0.6s ease, box-shadow 0.6s ease;
+}
+.card-boutique:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 40px 60px rgba(0,0,0,0.15);
+}
+
+.img-container {
+    background-color: #ECEBE4;
+    padding: 40px;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.img-placeholder-premium {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #777;
+    font-size: 1.1rem;
+}
+
+.card-boutique-body {
+    padding-top: 20px;
+    text-align: center;
+}
+
+.product-category {
+    text-transform: uppercase;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: #9A724B;
+}
+
+.product-title {
+    font-size: 1.3rem;
+}
+
+.product-price {
+    font-weight: 600;
+}
+
+/* Botones elegantes con paleta de colores */
+.btn-hs {
+    border-radius: 50px;
+    padding: 8px 20px;
+    font-weight: 600;
+    color: #fff;
+    border: 2px solid #9A724B;
+    background-color: #9A724B;
+    transition: all 0.3s ease;
+}
+.btn-hs:hover {
+    background-color: #fff;
+    color: #9A724B;
+}
+
+/* Toasts personalizados */
+.toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1055;
+}
+.toast-custom {
+    background-color: #9A724B;
+    color: #fff;
+    font-weight: 500;
+    border-radius: 8px;
+    padding: 12px 18px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    margin-top: 10px;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: all 0.4s ease;
+}
+.toast-custom.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+</style>
+</head>
+
+<body>
+
+<section id="boutique" class="section-padding bg-hs-off-white">
+    <div class="container">
+        <div class="text-center mb-5 pb-4">
+            <h2 class="display-4 serif mb-2 glow-text">
+                <span class="serif-italic">High Sierra</span> Essentials
+            </h2>
+            <p class="lead text-muted">
+                Descubre nuestra selección de productos premium y servicios de nuestras instalaciones, pensados para elevar tu experiencia en el club a un nivel sin igual.
+            </p>
+        </div>
+
+        <div id="boutiqueRotator" class="carousel slide carousel-fade" data-bs-ride="carousel">
+            <div class="carousel-inner">
+
+                <!-- SLIDE 1 -->
+                <div class="carousel-item active">
+                    <div class="row g-4">
+                        <!-- Producto 1 -->
+                        <div class="col-md-4">
+                            <div class="card card-boutique">
+                                <div class="img-container">
+                                    <img src="Imágenes/country_club_pics/premium_photo-1661501222517-4e6972d2e080.avif" alt="Raqueta moderna" class="w-100 h-100 object-fit-cover">
+                                </div>
+                                <div class="card-boutique-body">
+                                    <p class="product-category">Raqueta de tenis moderna</p>
+                                    <h4 class="product-title serif">Diseño minimalista con marco de alta resistencia y acabado elegante. Ideal para jugadores que buscan precisión y estilo en la cancha.</h4>
+                                    <p class="product-price">$320 USD</p>
+                                    <button class="btn btn-hs add-to-cart" data-product="Raqueta de tenis moderna" data-price="320">Añadir al carrito</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 2 -->
+                        <div class="col-md-4">
+                            <div class="card card-boutique">
+                                <div class="img-container">
+                                    <img src="Imágenes/country_club_pics/premium_photo-1765828956695-3f9d642834a7.avif" alt="Bolso deportivo" class="w-100 h-100 object-fit-cover">
+                                </div>
+                                <div class="card-boutique-body">
+                                    <p class="product-category">Bolso deportivo premium</p>
+                                    <h4 class="product-title serif">Fabricado con materiales de alta calidad y detalles en cuero. Perfecto para transportar tu equipo con estilo y comodidad.</h4>
+                                    <p class="product-price">$480 USD</p>
+                                    <button class="btn btn-hs add-to-cart" data-product="Bolso deportivo premium" data-price="480">Añadir al carrito</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 3 -->
+                        <div class="col-md-4">
+                            <div class="card card-boutique">
+                                <div class="img-container">
+                                    <img src="Imágenes/country_club_pics/photo-1615343303847-443dd6167322.avif" alt="Raqueta clásica" class="w-100 h-100 object-fit-cover">
+                                </div>
+                                <div class="card-boutique-body">
+                                    <p class="product-category">Raqueta de tenis clásica vintage</p>
+                                    <h4 class="product-title serif">Madera clásica con encordado tradicional, perfecta para coleccionistas o amantes del estilo retro en el tenis.</h4>
+                                    <p class="product-price">$500 USD</p>
+                                    <button class="btn btn-hs add-to-cart" data-product="Raqueta de tenis clásica vintage" data-price="500">Añadir al carrito</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- SLIDE 2 -->
+                <div class="carousel-item">
+                    <div class="row g-4">
+
+                        <!-- Producto 4 -->
+                        <div class="col-md-4">
+                            <div class="card card-boutique">
+                                <div class="img-container">
+                                    <img src="Imágenes/country_club_pics/photo-1634606847472-20a33df3ee61.avif" alt="Campo de Golf" class="w-100 h-100 object-fit-cover">
+                                </div>
+                                <div class="card-boutique-body">
+                                    <p class="product-category">Campo de Golf</p>
+                                    <h4 class="product-title serif">Disfruta de entrenamientos en campos emblemáticos, donde perfeccionarás tu swing como un verdadero amante del golf.</h4>
+                                    <p class="product-price">$1000 USD</p>
+                                    <button class="btn btn-hs add-to-cart" data-product="Campo de Golf" data-price="1000">Añadir al carrito</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 5 -->
+                        <div class="col-md-4">
+                            <div class="card card-boutique">
+                                <div class="img-container">
+                                    <img src="Imágenes/country_club_pics/premium_photo-1733342490554-4bcb4c60631e.avif" alt="Cancha de Tenis" class="w-100 h-100 object-fit-cover">
+                                </div>
+                                <div class="card-boutique-body">
+                                    <p class="product-category">Cancha de Tenis</p>
+                                    <h4 class="product-title serif">Practica tenis en instalaciones diseñadas para el deporte, con canchas bien acondicionadas y ambiente social.</h4>
+                                    <p class="product-price">$800 USD</p>
+                                    <button class="btn btn-hs add-to-cart" data-product="Cancha de Tenis" data-price="800">Añadir al carrito</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 6 -->
+                        <div class="col-md-4">
+                            <div class="card card-boutique">
+                                <div class="img-container">
+                                    <img src="Imágenes/country_club_pics/photo-1625476349544-b315ca2c615e.avif" alt="Yoga y bienestar" class="w-100 h-100 object-fit-cover">
+                                </div>
+                                <div class="card-boutique-body">
+                                    <p class="product-category">Yoga y bienestar integral</p>
+                                    <h4 class="product-title serif">El yoga es mucho más que un ejercicio, es un camino hacia la armonía y bienestar integral.</h4>
+                                    <p class="product-price">$300 USD</p>
+                                    <button class="btn btn-hs add-to-cart" data-product="Yoga y bienestar integral" data-price="300">Añadir al carrito</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#boutiqueRotator" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#boutiqueRotator" data-bs-slide-to="1"></button>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Contenedor de toasts -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    new bootstrap.Carousel('#boutiqueRotator', {
+        interval: 4500,
+        wrap: true
+    });
+
+    let cart = [];
+    const addButtons = document.querySelectorAll('.add-to-cart');
+    const toastContainer = document.getElementById('toastContainer');
+
+    function showToast(message){
+        const toast = document.createElement('div');
+        toast.classList.add('toast-custom');
+        toast.textContent = message;
+        toastContainer.appendChild(toast);
+        setTimeout(() => toast.classList.add('show'), 50);
+        setTimeout(() => {
+            toast.classList.remove('show');
+            setTimeout(() => toast.remove(), 400);
+        }, 2000);
+    }
+
+    addButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const productName = button.getAttribute('data-product');
+            const productPrice = button.getAttribute('data-price');
+
+            const index = cart.findIndex(item => item.name === productName);
+            if(index === -1){
+                cart.push({name: productName, price: productPrice});
+                button.textContent = "Eliminar del carrito";
+                button.classList.remove('btn-hs');
+                button.classList.add('btn-danger');
+                showToast(`✅ "${productName}" agregado al carrito.`);
+            } else {
+                cart.splice(index, 1);
+                button.textContent = "Añadir al carrito";
+                button.classList.remove('btn-danger');
+                button.classList.add('btn-hs');
+                showToast(`❌ "${productName}" eliminado del carrito.`);
+            }
+
+            console.log(cart);
+        });
+    });
+});
+</script>
+
+</body>
+</html>
