@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>High Sierra | Private Sports Estate | By Invitation Only</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Paleta Base */
+            --hs-carbon: #1C1C1C;
+            --hs-sage-grey: #DADDD8;
+            --hs-sand: #ECEBE4;
+            --hs-off-white: #EEF0F2;
+            --hs-pure-white: #FAFAFF;
+            /* Acentos Premium */
+            --hs-copper: #C29B6F;
+            --hs-bronze: #9A724B;
+            
+            /* Tipografía */
+            --font-sans: 'Montserrat', sans-serif;
+            --font-serif: 'Playfair Display', serif;
+        }
+
+        /* === MEJORA: Suavizado de fuentes y ocultamiento de cursor nativo === */
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--hs-pure-white);
+            color: var(--hs-carbon);
+            font-weight: 300;
+            overflow-x: hidden;
+            letter-spacing: 0.02em;
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            cursor: none; /* Oculta el cursor nativo */
+        }
+        
+        /* Asegurar que los enlaces no muestren el cursor de "mano" nativo */
+        a, button, input, select, textarea, .floating-concierge { cursor: none !important; }
+
+        ::selection { background-color: var(--hs-copper); color: var(--hs-pure-white); }
+
+        h1, h2, h3, h4, h5, .serif { font-family: var(--font-serif); font-weight: 400; }
+        
+        .serif-italic {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-weight: 400;
+            color: var(--hs-bronze);
+        }
+
+        /* Utilidades de Color */
+        .text-hs-carbon { color: var(--hs-carbon) !important; }
+        .text-hs-copper { color: var(--hs-copper) !important; }
+        .text-hs-bronze { color: var(--hs-bronze) !important; }
+        .text-hs-pure-white { color: var(--hs-pure-white) !important; }
+        .text-hs-sage-grey { color: var(--hs-sage-grey) !important; }
+        
+        .bg-hs-carbon { background-color: var(--hs-carbon) !important; }
+        .bg-hs-sand { background-color: var(--hs-sand) !important; }
+        .bg-hs-off-white { background-color: var(--hs-off-white) !important; }
+
+        .section-padding { padding: 140px 0; }
+
+        /* === Sombras Dramáticas y Luces de Estudio === */
+        .shadow-dramatic {
+            box-shadow: 0 40px 80px rgba(0,0,0,0.15), 
+                        inset 0 1px 0 rgba(255,255,255,0.9) !important;
+            transition: box-shadow 0.6s ease, transform 0.6s ease;
+        }
+        .bg-hs-carbon .shadow-dramatic, .shadow-dramatic.dark-mode {
+            box-shadow: 0 40px 80px rgba(0,0,0,0.8), 
+                        inset 0 1px 0 rgba(194, 155, 111, 0.4) !important;
+        }
+
+        /* === Preloader de Lujo === */
+        .hs-preloader {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100vh;
+            background-color: var(--hs-carbon);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), visibility 1.2s;
+        }
+        .hs-preloader.fade-out { opacity: 0; visibility: hidden; }
+        .hs-preloader-brand {
+            color: var(--hs-pure-white);
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            animation: pulse-glow 2s infinite alternate;
+        }
+        .hs-preloader-brand span { color: var(--hs-copper); }
+        @keyframes pulse-glow { 0% { opacity: 0.6; } 100% { opacity: 1; text-shadow: 0 0 15px rgba(194, 155, 111, 0.2); } }
+
+        /* === Cursor Personalizado === */
+        .cursor-dot {
+            width: 6px; height: 6px;
+            background-color: var(--hs-copper);
+            border-radius: 50%;
+            position: fixed;
+            top: 0; left: 0;
+            pointer-events: none;
+            z-index: 10000;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s;
+            box-shadow: 0 0 10px rgba(194, 155, 111, 0.8);
+        }
+        .cursor-outline {
+            width: 40px; height: 40px;
+            border: 1px solid rgba(194, 155, 111, 0.5);
+            border-radius: 50%;
+            position: fixed;
+            top: 0; left: 0;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, background-color 0.3s;
+        }
+        .cursor-outline.hover-active {
+            width: 60px; height: 60px;
+            background-color: rgba(194, 155, 111, 0.1);
+            border-color: transparent;
+        }
+
+        /* === Navbar Premium === */
+        .navbar-hs {
+            background-color: transparent;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            padding: 35px 0;
+            border-bottom: 1px solid transparent;
+        }
+        .navbar-hs.scrolled {
+            background-color: rgba(28, 28, 28, 0.98);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(194, 155, 111, 0.3);
+        }
+        .brand-logo-box {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            border: 1px solid var(--hs-copper);
+            color: var(--hs-copper);
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            margin-right: 15px;
+        }
+        .navbar-brand-text {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: var(--hs-pure-white) !important;
+        }
+        .nav-link-hs {
+            color: var(--hs-pure-white) !important;
+            font-weight: 400;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.25em;
+            margin: 0 15px;
+            position: relative;
+        }
+
+        /* === Animaciones (Scroll Reveal) === */
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .reveal-up.active { opacity: 1; transform: translateY(0); }
+
+        /* === Hero Section === */
+        .hero-luxury {
+            height: 100vh;
+            background: linear-gradient(rgba(28,28,28,0.5), rgba(28,28,28,0.8)), 
+                        url('https://images.unsplash.com/photo-1540331547168-8b63109225b7?q=80&w=2500&auto=format&fit=crop') no-repeat center center/cover;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--hs-pure-white);
+            text-align: center;
+        }
+        .hero-title { font-size: 6rem; line-height: 1.1; margin-bottom: 30px; letter-spacing: -0.02em; }
+        .hero-subtitle { font-weight: 300; text-transform: uppercase; letter-spacing: 0.6em; font-size: 0.9rem; color: var(--hs-sage-grey); margin-bottom: 50px; }
+
+        /* === Botones === */
+        .btn-hs-primary {
+            background-color: transparent;
+            border: 1px solid var(--hs-copper);
+            color: var(--hs-copper);
+            border-radius: 0;
+            padding: 20px 50px;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.35em;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-hs-primary::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 0%; height: 100%;
+            background-color: var(--hs-copper);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: -1;
+        }
+        .btn-hs-primary:hover { color: var(--hs-carbon); }
+        .btn-hs-primary:hover::before { width: 100%; }
+
+        .btn-hs-dark {
+            background-color: var(--hs-carbon);
+            border: 1px solid var(--hs-carbon);
+            color: var(--hs-pure-white);
+            border-radius: 0;
+            padding: 15px 35px;
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            letter-spacing: 0.25em;
+            transition: all 0.4s ease;
+        }
+        .btn-hs-dark:hover { background-color: var(--hs-pure-white); color: var(--hs-carbon); border-color: var(--hs-carbon); }
+
+        /* === Formulario de Aplicación (REDISEÑADO) === */
+        .form-hs .form-control, .form-hs .form-select, .form-hs textarea {
+            border-radius: 0; border: none; border-bottom: 1px solid rgba(28,28,28,0.1);
+            background-color: transparent; padding: 15px 5px; color: var(--hs-carbon); font-weight: 300;
+            transition: border-color 0.4s ease, background-color 0.4s ease;
+            font-size: 0.95rem;
+        }
+        .form-hs .form-control:focus, .form-hs .form-select:focus, .form-hs textarea:focus { 
+            box-shadow: none; border-color: var(--hs-copper); background-color: rgba(194, 155, 111, 0.02);
+        }
+        .form-hs label { 
+            font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.2em; 
+            color: var(--hs-bronze); font-weight: 600; margin-bottom: 0; 
+        }
+        .form-step-title {
+            font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.3em;
+            color: var(--hs-bronze); margin-bottom: 2rem; border-bottom: 1px solid var(--hs-sage-grey);
+            padding-bottom: 0.5rem; display: inline-block;
+        }
+
+        /* Concierge Flotante */
+        .floating-concierge {
+            position: fixed; bottom: 40px; right: 40px; width: 60px; height: 60px;
+            background-color: var(--hs-carbon); color: var(--hs-copper); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            cursor: pointer; z-index: 1000;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); font-family: var(--font-serif); font-size: 1.5rem; text-decoration: none;
+        }
+        .floating-concierge:hover { transform: scale(1.1); background-color: var(--hs-copper); color: var(--hs-carbon); }
+
+        /* Footer */
+        .footer-hs { background-color: var(--hs-carbon); color: var(--hs-sage-grey); padding: 100px 0 40px 0; }
+        .footer-hs-title { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--hs-copper); margin-bottom: 25px; font-weight: 500; }
+        .footer-hs-link { color: var(--hs-sage-grey); text-decoration: none; font-size: 0.8rem; transition: color 0.3s ease; display: block; margin-bottom: 12px; }
+        .footer-hs-link:hover { color: var(--hs-pure-white); }
+
+        @media (max-width: 992px) { .hero-title { font-size: 3.5rem; } }
+        @media (max-width: 768px) { body { cursor: auto; } .cursor-dot, .cursor-outline { display: none; } }
+    </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target="#navbarMain">
+
+    <div class="hs-preloader" id="preloader">
+        <div class="hs-preloader-brand">High <span>Sierra</span></div>
+    </div>
+
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-outline" id="cursor-outline"></div>
+    <a href="#membership" class="floating-concierge hover-target">C</a>
+
+    <nav id="navbarMain" class="navbar navbar-expand-lg navbar-dark fixed-top navbar-hs">
+        <div class="container-fluid px-4 px-lg-5">
+            <a class="navbar-brand navbar-brand-hs d-flex align-items-center text-decoration-none hover-target" href="#">
+                <span class="brand-logo-box">HS</span>
+                <span class="navbar-brand-text">High <span class="text-hs-copper">Sierra</span></span>
+            </a>
+            <button class="navbar-toggler border-0 hover-target" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto text-center align-items-center">
+                    <li class="nav-item"><a class="nav-link nav-link-hs hover-target" href="#hero">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link nav-link-hs hover-target" href="#membership">Aplicación</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="hero" class="hero-luxury">
+        <div class="container reveal-up active">
+            <p class="hero-subtitle">El Apogeo del Capital</p>
+            <h1 class="hero-title fw-bold">Sovereignty <br> of <span class="serif-italic">Leisure</span>.</h1>
+            <p class="lead fw-light mb-5 mx-auto" style="max-width: 650px; color: var(--hs-off-white);">
+                No diseñamos membresías; curamos un ecosistema donde su fortuna adquiere su valor definitivo.
+            </p>
+            <a href="#membership" class="btn btn-hs-primary hover-target">Iniciar Protocolo</a>
+        </div>
+    </section>
+
+    <!-- FORMULARIO REDISEÑADO -->
+    <section id="membership" class="section-padding bg-hs-sand text-hs-carbon">
+        <div class="container">
+            <div class="row justify-content-center text-center mb-5 pb-4 reveal-up">
+                <div class="col-lg-8">
+                    <h2 class="display-4 serif mb-3">Conservando el <span class="serif-italic">Legado</span></h2>
+                    <p class="lead fw-light text-muted">La admisión a High Sierra está limitada a 50 nuevos miembros anuales. Complete este registro preliminar para iniciar el proceso de admisión.</p>
+                </div>
+            </div>
+            
+            <div class="row justify-content-center reveal-up">
+                <div class="col-lg-11">
+                    <div class="bg-hs-pure-white shadow-dramatic border-0 overflow-hidden">
+                        <div class="row g-0">
+                            <!-- Columna de Información Lateral -->
+                            <div class="col-lg-4 bg-hs-carbon p-5 text-hs-pure-white d-flex flex-column justify-content-between">
+                                <div>
+                                    <h4 class="serif text-hs-copper mb-4">Directrices de <span class="serif-italic">Admisión</span></h4>
+                                    <ul class="list-unstyled fw-light small opacity-75">
+                                        <li class="mb-4">
+                                            <strong class="text-hs-copper d-block text-uppercase mb-1" style="letter-spacing: 0.1em;">I. Verificación</strong>
+                                            Todo aplicante es sometido a una diligencia debida *AML/KYC* de espectro completo por terceros independientes.
+                                        </li>
+                                        <li class="mb-4">
+                                            <strong class="text-hs-copper d-block text-uppercase mb-1" style="letter-spacing: 0.1em;">II. Referencias</strong>
+                                            Se priorizan aplicaciones avaladas por miembros actuales del consejo o socios fundadores.
+                                        </li>
+                                        <li class="mb-4">
+                                            <strong class="text-hs-copper d-block text-uppercase mb-1" style="letter-spacing: 0.1em;">III. Entrevista</strong>
+                                            La aprobación final requiere una sesión presencial en nuestras oficinas de Coyoacán, CDMX.
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="pt-5 border-top border-secondary">
+                                    <p class="small serif-italic text-hs-copper mb-0">"La privacidad no es un lujo, es nuestro estándar operativo."</p>
+                                </div>
+                            </div>
+
+                            <!-- Columna del Formulario -->
+                            <div class="col-lg-8 p-5">
+                                <form class="form-hs">
+                                    
+                                    <!-- PASO 1: IDENTIDAD -->
+                                    <div class="mb-5">
+                                        <span class="form-step-title">01. Identidad y Representación</span>
+                                        <div class="row g-4">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Nombre Completo del Principal</label>
+                                                    <input type="text" class="form-control hover-target" placeholder="Ej. Alexander Montemayor">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Family Office / Firma de Representación</label>
+                                                    <input type="text" class="form-control hover-target" placeholder="Nombre de la entidad">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Jurisdicción de Residencia Principal</label>
+                                                    <select class="form-select hover-target">
+                                                        <option selected disabled>Seleccionar...</option>
+                                                        <option> México (MX)</option>
+                                                        <option>Suiza (CH)</option>
+                                                        <option>Reino Unido (UK)</option>
+                                                        <option>Estados Unidos (US)</option>
+                                                        <option>Emiratos Árabes (UAE)</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Canal de Comunicación Encriptado</label>
+                                                    <input type="email" class="form-control hover-target" placeholder="email@confidencial.com">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- PASO 2: INTERÉS -->
+                                    <div class="mb-5">
+                                        <span class="form-step-title">02. Enfoque de Membresía</span>
+                                        <div class="row g-4">
+                                            <div class="col-md-12">
+                                                <label>Área de Interés Predominante</label>
+                                                <div class="d-flex flex-wrap gap-2 mt-2">
+                                                    <input type="checkbox" class="btn-check" id="btn-golf" autocomplete="off">
+                                                    <label class="btn btn-outline-dark btn-sm rounded-0 hover-target px-3" for="btn-golf">Golf de Autor</label>
+
+                                                    <input type="checkbox" class="btn-check" id="btn-alpine" autocomplete="off">
+                                                    <label class="btn btn-outline-dark btn-sm rounded-0 hover-target px-3" for="btn-alpine">Deportes Alpinos</label>
+
+                                                    <input type="checkbox" class="btn-check" id="btn-equest" autocomplete="off">
+                                                    <label class="btn btn-outline-dark btn-sm rounded-0 hover-target px-3" for="btn-equest">Hípica & Polo</label>
+
+                                                    <input type="checkbox" class="btn-check" id="btn-yacht" autocomplete="off">
+                                                    <label class="btn btn-outline-dark btn-sm rounded-0 hover-target px-3" for="btn-yacht">Náutica</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label>Declaración de Intenciones (Opcional)</label>
+                                                    <textarea class="form-control hover-target" rows="2" placeholder="Breve descripción de sus expectativas sobre High Sierra..."></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- PASO 3: VERIFICACIÓN -->
+                                    <div class="mb-5">
+                                        <span class="form-step-title">03. Credenciales de Acceso</span>
+                                        <div class="row g-4">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>Código de Invitación / Referencia de Miembro</label>
+                                                    <input type="text" class="form-control hover-target" placeholder="HS-XXXX-XXXX-XXXX">
+                                                    <small class="text-muted d-block mt-2" style="font-size: 0.65rem;">Si no posee un código, deje este campo en blanco para una revisión de oficina abierta.</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="text-end pt-4 border-top">
+                                        <button type="button" class="btn btn-hs-dark px-5 py-3 text-uppercase letter-spacing-lg hover-target">
+                                           Solicitar acceso
+                                            <span class="ms-2">→</span>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer-hs">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-4 mb-4 mb-lg-0 reveal-up">
+                    <a class="navbar-brand-hs d-flex align-items-center text-decoration-none mb-4" href="#">
+                        <span class="brand-logo-box text-hs-copper" style="border-color: rgba(194, 155, 111, 0.5);">HS</span>
+                        <span class="navbar-brand-text text-hs-pure-white" style="font-size: 1.5rem;">High <span class="text-hs-copper">Sierra</span></span>
+                    </a>
+                    <p class="fw-light text-hs-sage-grey" style="font-size: 0.8rem; line-height: 1.8; max-width: 250px;">
+                        The Apex of Private Sovereignty. A sanctuary for those who shape the world.
+                    </p>
+                </div>
+                
+                <div class="col-md-4 col-lg-4 reveal-up">
+                    <h5 class="footer-hs-title">Gobernanza</h5>
+                    <a href="#" class="footer-hs-link hover-target">Portal de Miembros</a>
+                    <a href="#" class="footer-hs-link hover-target">Protocolos de Discreción</a>
+                    <a href="#" class="footer-hs-link hover-target">Compliance Corporativo</a>
+                </div>
+
+                <div class="col-md-4 col-lg-4 reveal-up">
+                    <h5 class="footer-hs-title">Despacho Principal</h5>
+                    <p class="text-hs-pure-white mb-1" style="font-size: 0.85rem;">Bahnhofstrasse 1, 8001</p>
+                    <p class="text-hs-sage-grey mb-3" style="font-size: 0.85rem;">Zurich, Switzerland</p>
+                    <a href="mailto:office@highsierra.ch" class="footer-hs-link text-decoration-underline hover-target" style="color: var(--hs-copper);">office@highsierra.ch</a>
+                </div>
+            </div>
+
+            <div class="row border-top border-secondary mt-5 pt-4 opacity-50">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="small text-uppercase mb-0">&copy; 2026 High Sierra Holdings AG.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="small text-uppercase mb-0">By Invitation Only. Access Strictly Monitored.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // 1. Preloader Logic
+            const preloader = document.getElementById('preloader');
+            setTimeout(() => {
+                preloader.classList.add('fade-out');
+                setTimeout(() => { preloader.style.display = 'none'; }, 1200);
+            }, 1000);
+
+            // 2. Custom Cursor Logic
+            const cursorDot = document.getElementById('cursor-dot');
+            const cursorOutline = document.getElementById('cursor-outline');
+            const hoverTargets = document.querySelectorAll('.hover-target, a, button, input, select, textarea');
+
+            window.addEventListener('mousemove', function(e) {
+                const posX = e.clientX;
+                const posY = e.clientY;
+                cursorDot.style.left = `${posX}px`;
+                cursorDot.style.top = `${posY}px`;
+                cursorOutline.animate({ left: `${posX}px`, top: `${posY}px` }, { duration: 500, fill: "forwards" });
+            });
+
+            hoverTargets.forEach(target => {
+                target.addEventListener('mouseenter', () => {
+                    cursorOutline.classList.add('hover-active');
+                    cursorDot.style.backgroundColor = 'transparent';
+                });
+                target.addEventListener('mouseleave', () => {
+                    cursorOutline.classList.remove('hover-active');
+                    cursorDot.style.backgroundColor = 'var(--hs-copper)';
+                });
+            });
+
+            // 3. Nav scroll
+            window.addEventListener('scroll', function() {
+                const navbar = document.querySelector('.navbar-hs');
+                if (window.scrollY > 50) navbar.classList.add('scrolled');
+                else navbar.classList.remove('scrolled');
+            });
+
+            // 4. Scroll Reveal
+            const reveals = document.querySelectorAll(".reveal-up");
+            const revealOptions = { threshold: 0.15 };
+            const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) return;
+                    entry.target.classList.add("active");
+                    observer.unobserve(entry.target); 
+                });
+            }, revealOptions);
+            reveals.forEach(reveal => revealOnScroll.observe(reveal));
+        });
+    </script>
+</body>
+</html>
+
